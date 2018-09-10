@@ -9,20 +9,25 @@ import { MenuPrincipalComponent } from './menu-principal/menu-principal.componen
 import { AngularFireModule } from 'angularfire2';
 import { AngularFirestoreModule } from 'angularfire2/firestore';
 import { AngularFireAuthModule } from 'angularfire2/auth';
+import { ReactiveFormsModule } from '@angular/forms';
 
 import { environment } from '../environments/environment';
+import { GerenciaProjetoComponent } from './gerencia-projeto/gerencia-projeto.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     HomeComponent,
     MenuPrincipalComponent,
-    ContatoComponent
+    ContatoComponent,
+    GerenciaProjetoComponent
 
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
+    ReactiveFormsModule,
+
     AngularFireModule.initializeApp(environment.firebase),
     AngularFirestoreModule, // imports firebase/firestore, only needed for database features
     AngularFireAuthModule, // imports firebase/auth, only needed for auth features,

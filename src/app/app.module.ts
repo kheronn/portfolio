@@ -9,6 +9,7 @@ import { MenuPrincipalComponent } from './menu-principal/menu-principal.componen
 import { AngularFireModule } from 'angularfire2';
 import { AngularFirestoreModule } from 'angularfire2/firestore';
 import { AngularFireAuthModule } from 'angularfire2/auth';
+import { AngularFireStorageModule } from 'angularfire2/storage';
 import { ReactiveFormsModule } from '@angular/forms';
 
 import { environment } from '../environments/environment';
@@ -31,7 +32,7 @@ import { GerenciaProjetoComponent } from './gerencia-projeto/gerencia-projeto.co
     AngularFireModule.initializeApp(environment.firebase),
     AngularFirestoreModule, // imports firebase/firestore, only needed for database features
     AngularFireAuthModule, // imports firebase/auth, only needed for auth features,
-
+    AngularFireStorageModule // imports firebase/storage only needed for storage features
 
   ],
   providers: [],

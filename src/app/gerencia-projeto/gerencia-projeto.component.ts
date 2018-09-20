@@ -3,6 +3,7 @@ import { Observable } from 'rxjs';
 import { Project } from './../project.model';
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { AngularFireStorage, AngularFireUploadTask } from 'angularfire2/storage';
 
 @Component({
   selector: 'app-gerencia-projeto',
@@ -19,7 +20,15 @@ export class GerenciaProjetoComponent implements OnInit {
   messages: string;
   id: string;
 
-  constructor(private projectService: ProjectService, private form: FormBuilder) { }
+  //Para upload da imagem
+  uploadPercent: Observable<number>;
+  downloadURL: Observable<string>;
+  task: AngularFireUploadTask;
+  complete: boolean;
+  caminhoImagem: string;
+
+
+  constructor(private storage: AngularFireStorage, private projectService: ProjectService, private form: FormBuilder) { }
 
   ngOnInit() {
     this.initForm()
@@ -35,12 +44,30 @@ export class GerenciaProjetoComponent implements OnInit {
     });
   }
 
+  upload(event) {
+
+    this.complete = false;
+    const file = event.target.files[0]
+    const path = `imagens/${file.name}`;
+    const fileRef = this.storage.ref(path.replace(/\s/g, ''));
+    this.task = this.storage.upload(path.replace(/\s/g, ''), file)
+    this.task.then(up => {
+      fileRef.getDownloadURL().subscribe(url => {
+        this.complete = true
+        this.caminhoImagem = url
+
+      })
+    })
+    this.uploadPercent = this.task.percentageChanges();
+  }
+
   saveProject() {
     if (this.formProject.invalid) {
       this.messages = `Verifique os campo sobrigatórios!`
       return;
     }
     this.project = this.formProject.value
+    this.project.photoMain = this.caminhoImagem;
     if (!this.edit) {
       this.projectService.save(this.project)
         .then(() => {

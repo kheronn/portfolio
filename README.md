@@ -11,7 +11,9 @@
 
 [Parte 3]( https://medium.com/kheronn.machado/angular6-firebase-portfolio-part3-c63ba1cd83cd )
 
-[Parte 4 - Em Breve]
+[Parte 4]( https://medium.com/kheronn.machado/angular6-parte4-7f7a82175b87 )
+
+[Parte 5]( https://medium.com/kheronn.machado/angular6-firebase-parte5-6769204f77f4 )
 
 Baixe o arquivo e na pasta do projeto, execute no terminal
 `npm install`
